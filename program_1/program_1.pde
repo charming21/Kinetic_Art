@@ -8,7 +8,7 @@ void setup() {
 
   background(255, 255, 255);
   createGrid(numberSquares, squareWidth);
-  algo(35, 37, 6, 36, 10, 12);
+  //algo(35, 37, 6, 36, 10, 12);
 }
 
 
@@ -46,12 +46,17 @@ void randomColor() {
 
 void drawSquare(int row, int col) {
    randomColor();
-   rect(row*squareWidth, col*squareWidth, squareWidth, squareWidth); 
+   rect(row*squareWidth, 
+        col*squareWidth, 
+        squareWidth, 
+        squareWidth); 
 }
 
 void drawCircle(int row, int col) {
    randomColor();
-   circle(row*squareWidth - squareWidth/2, col*squareWidth - squareWidth/2, squareWidth); 
+   circle(row*squareWidth - squareWidth/2 + squareWidth, 
+          col*squareWidth - squareWidth/2 + squareWidth, 
+          squareWidth); 
 }
 
 void drawRecLeft(int row, int col) {
@@ -66,26 +71,24 @@ void drawRecRight(int row, int col) {
 
 void drawTriTopLeft(int row, int col) {
   randomColor();
-  triangle(row*squareWidth- squareWidth, 
+  triangle(row*squareWidth, 
            squareWidth*col, 
-           
-           squareWidth*row - squareWidth, 
-           squareWidth*col + squareWidth, 
-           
            squareWidth*row, 
+           squareWidth*col + squareWidth, 
+           squareWidth*row + squareWidth, 
            squareWidth*col);
 }
 
 void drawTriBotRight(int row, int col) {
   randomColor();
   triangle(row*squareWidth + squareWidth, 
-           squareWidth*col, 
+           squareWidth*col + squareWidth, 
            
            squareWidth*row + squareWidth, 
-           squareWidth*col - squareWidth, 
+           squareWidth*col, 
            
            squareWidth*row, 
-           squareWidth*col);
+           squareWidth*col + squareWidth);
 }
 
 int getRandom() {
@@ -115,41 +118,37 @@ void algo(int numSquare, int numCircles, int numTopTri, int numBotTri,int numRec
 
 }
 
-// doesn't work super well rounding problems
-//void mousePressed() {
-//  int x = (int) mouseX / squareWidth;
-//  int y = (int) mouseY / squareWidth;
+void mousePressed() {
+  int x = ((int) mouseX) / squareWidth;
+  int y = ((int) mouseY) / squareWidth;
   
-//  println("click!");
-//  println("x: " + x);
-//  //print(y);
-//  println("y: " + y);
+  drawRandom(x , y);
   
-//  println("click!");
-//  println("x div : " + x / squareWidth);
-//  //print(y);
-//  println("y div : " + y / squareWidth);
-  
-//  drawRandom(x , y);
-  
-//}
+}
 
-//void drawRandom(int row, int col) {
+void drawRandom(int row, int col) {
   
-//  int value = (int) random(1, 4);
+  int value = (int) random(1, 4);
   
-//  println("value : " + value);
+   switch(value) {
+    case 1:
+      drawSquare(row, col);
+      break;
+    case 2:
+      drawCircle(row, col);
+      break;
+    case 3:
+      drawTriTopLeft(row, col);
+      break;
+    case 4:
+      drawTriBotRight(row, col);
+      break;
+    case 5:
+      drawRecLeft(row, col);
+      break;
+    case 6:
+      drawRecRight(row, col);
+      break;
+  }
   
-//   switch(value) {
-//    case 1:
-//      drawSquare(row, col);
-//      break;
-//    case 2:
-//      drawCircle(row, col);
-//      break;
-//    case 3:
-//      drawTriTopLeft(row, col);
-//      break;
-//  }
-  
-//}
+}

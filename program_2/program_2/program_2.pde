@@ -35,7 +35,7 @@ void nightColor() {
 }
 
 void drawCircle(int temp) {
-  dayColor();
+  dayColor(); //should change based of when the temperature was taken.
   float xCircle = centerpoint+xScaler*(cos(angle)*temp);
   float yCircle = centerpoint+yScaler*(sin(angle)*temp);
   float rCircle = ((temp % 24)+1)*rScaler;

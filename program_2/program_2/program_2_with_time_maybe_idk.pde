@@ -1,6 +1,7 @@
 int windowSize = 600;
 IntList tempList;
 IntList timeList;
+StringList shortForecastList;
 int centerpoint = windowSize/2;
 float angle = random(360);
 float xScaler = random(10);
@@ -16,9 +17,11 @@ void setup() {
   centerDot();
   readFile();
   translate(width / 2, height / 2); // Move the origin to the center of the canvas 
-  for(int i = 0; i < 10; i++){
-  sunny(random(-300,300), random(-300, 300));
-  }
+  //code to draw the sun
+  //for(int i = 0; i < 10; i++){
+  //  sunny(random(-300,300), random(-300, 300));
+  //}
+  //cloudy();
   //for(int i = 0; i< tempList.size(); i++) {
   //  drawCircle(tempList.get(i), timeList.get(i));
   //}
@@ -35,9 +38,9 @@ void sunny(float row, float col){
   float linestarts = 20;
   float lineends = linestarts*2;
   
-  //fill(0,0,0);
   fill(253, 184, 19);
   circle(circlex, circley, circler);
+  
   //top
   line(circlex,circley - linestarts,circlex , circley - lineends);
   //bottom
@@ -129,6 +132,7 @@ void readFile() {
   // Open the file from the createWriter() example 
   BufferedReader readerTemp = createReader("forecastTemp.txt");
   BufferedReader readerTime = createReader("forecastTime.txt");
+  BufferedReader readerShortForecast = createReader("forecastShort.txt");
 
   String line = null;
   
@@ -139,6 +143,10 @@ void readFile() {
   //for time reading
   int time;
   timeList = new IntList();
+  
+  //for shortforecast reading
+  String shortForecast;
+  shortForecastList = new StringList();
   
   try {
       while ((line=readerTemp.readLine())!=null) {
@@ -154,9 +162,19 @@ void readFile() {
       while ((line = readerTime.readLine())!=null) {
         time = int(line);
         timeList.append(time);
-        println(time);
       }
      readerTime.close();
+  } catch (IOException e) {
+    e.printStackTrace();
+  }
+  
+   try {
+      while ((line = readerShortForecast.readLine())!=null) {
+        shortForecast = line;
+        shortForecastList.append(shortForecast);
+        println(shortForecast);
+      }
+     readerShortForecast.close();
   } catch (IOException e) {
     e.printStackTrace();
   }

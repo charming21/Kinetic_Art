@@ -18,18 +18,38 @@ void setup() {
   readFile();
   translate(width / 2, height / 2); // Move the origin to the center of the canvas 
   //code to draw the sun
-  //for(int i = 0; i < 10; i++){
-  //  sunny(random(-300,300), random(-300, 300));
-  //}
-  //cloudy();
-  //for(int i = 0; i< tempList.size(); i++) {
-  //  drawCircle(tempList.get(i), timeList.get(i));
-  //}
+  for(int i = 0; i < 10; i++){
+    //sunny(random(-300,300), random(-300, 300));
+      //cloudy(random(-300,300), random(-300, 300));    
+  }
+  for(int i = 0; i< tempList.size(); i++) {
+    drawCircle(tempList.get(i), timeList.get(i));
+  }
 }
 
 void draw() {
 
 }
+
+void cloudy(float row, float col) {
+  float arcx = row;
+  float arcy = col;
+  float arcwidth = 50;
+  float archeight = 50;
+  float arcstart = PI+QUARTER_PI/2;
+  float arcstop = PI+PI;
+  
+  float distance = arcwidth/2;
+  
+  noFill();
+  arc(arcx, arcy, arcwidth, archeight, arcstart, arcstop);
+  arc(arcx - distance, arcy, arcwidth, archeight*.6, PI, PI+HALF_PI+QUARTER_PI*.3);
+  arc(arcx - distance*2, arcy+distance, arcwidth, archeight, PI, PI+HALF_PI);
+  arc(arcx + distance, arcy+distance, arcwidth, archeight, PI+HALF_PI/2, PI*2);
+  line(arcx - distance*2 - arcwidth/2, arcy+distance, arcx + distance + arcwidth/2, arcy+distance);
+  
+}
+
 
 void sunny(float row, float col){
   float circlex = row;

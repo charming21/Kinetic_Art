@@ -64,45 +64,53 @@ void centerDot() {
 
 void dayColor() {
   fill(253, 184, 19);
+  stroke(253, 184, 19);
 }
 
 void nightColor() {
-  fill(140, 190, 214);
+  //fill(140, 190, 214);
+  fill(34, 108, 224);
+  stroke(34, 108, 224);
+}
+
+void sunriseColor() {
+  fill(255, 129, 0);
+  stroke(255, 129, 0);
+}
+
+void sunsetColor() {
+  fill(251,144,98);
+  stroke(251,144,98);
+}
+
+void circleColor(int index){
+  if(index < 5 || index > 20) {
+    nightColor();
+  }
+  else if(index >= 5 && index <= 8 ) {
+    sunriseColor();
+  }
+  else if(index >= 17 && index <= 20) {
+    sunsetColor();
+  }
+  else if(index > 8 || index < 17) {
+    dayColor();
+  }
 }
 
 void drawCircle(int temp, int index) {
-  //dayColor(); //should change based of when the temperature was taken.
-  //float xCircle = centerpoint+xScaler*(cos(angle)*temp);
-  //float yCircle = centerpoint+yScaler*(sin(angle)*temp);
-  //float rCircle = ((temp % 24)+1)*rScaler;
   
-  //stroke(253,184, 19, 70); 
-  //line(centerpoint,centerpoint,xCircle, yCircle);
-  //stroke(253,184, 19, 70); 
-  //circle(xCircle,yCircle, rCircle);
-  
-  //angle = random(360);
-  //xScaler = random(10);
-  //yScaler = random(10);
-  //rScaler = random(3);
-  
-  //dayColor(); //should change based of when the temperature was taken.
   float angle = radians(index * 15); 
   float xCircle = cos(angle) * time; 
   float yCircle = sin(angle) * time; 
   
-  float rCircle = ((temp % 24)+1)*(temp/10) / 5;
+  float rCircle = ((temp % 24)+1) * 1.25;
   
-  if(index < 6 || index > 18) {
-    nightColor();
-  }
-  else {
-    dayColor();
-  }
+  circleColor(index);
   
-  stroke(253,184, 19, 70); 
+  //stroke(253,184, 19, 70); 
   line(0,0,xCircle, yCircle);
-  stroke(253,184, 19, 70); 
+  //stroke(253,184, 19, 70); 
   circle(xCircle,yCircle, rCircle);
   
   time += 1;

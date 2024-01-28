@@ -11,7 +11,29 @@ for line in f:
         x = p[0]
         tempatureList.append(x)
         print(x)
+        
+for line in f:
+    if line.__contains__("\"temperature\""):
+        # print(line)
+        p = line.split(": ")
+        p = p[1].split(",")
+        x = p[0]
+        tempatureList.append(x)
+        print(x)
 
+for line in f:
+    if line.__contains__("\"startTime\""):
+        # print(line)
+        p = line.split(": ")
+        p = p[1].split(",")
+        x = p[0]
+        j = x.split("T")
+        j = j[1].split("-")
+        j = j[0].split(":")
+        x = j[0]
+        tempatureList.append(x)
+        print(x)
+        
 print(len(tempatureList))
         
 # for i in tempatureList:

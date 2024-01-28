@@ -1,5 +1,6 @@
 int windowSize = 800;
 IntList tempList;
+IntList timeList;
 int centerpoint = windowSize/2;
 float angle = random(360);
 float xScaler = random(10);
@@ -16,7 +17,7 @@ void setup() {
   readFile();
   translate(width / 2, height / 2); // Move the origin to the center of the canvas 
   for(int i = 0; i< tempList.size(); i++) {
-    drawCircle(tempList.get(i), i);
+    drawCircle(tempList.get(i), timeList.get(i));
   }
 }
 
@@ -53,13 +54,20 @@ void drawCircle(int temp, int index) {
   //yScaler = random(10);
   //rScaler = random(3);
   
-  dayColor(); //should change based of when the temperature was taken.
+  //dayColor(); //should change based of when the temperature was taken.
   float angle = radians(index * 15); 
   float xCircle = cos(angle) * time; 
   float yCircle = sin(angle) * time; 
-    
+  
   float rCircle = ((temp % 24)+1)*(temp/10) / 5;
-    
+  
+  if(index < 6 || index > 18) {
+    nightColor();
+  }
+  else {
+    dayColor();
+  }
+  
   stroke(253,184, 19, 70); 
   line(0,0,xCircle, yCircle);
   stroke(253,184, 19, 70); 
@@ -74,24 +82,41 @@ void drawCircle(int temp, int index) {
         //noFill(); // Set the fill color to transparent
         //stroke(0, 0, 255); // Set the stroke color to blue
         //ellipse(0, 0, diameter, diameter); 
-   }
-    
-    
+   }    
 }
 
 void readFile() {
   // Open the file from the createWriter() example 
-  BufferedReader reader = createReader("forecastTemp.txt");
+  BufferedReader readerTemp = createReader("forecastTemp.txt");
+  BufferedReader readerTime = createReader("forecastTime.txt");
+
   String line = null;
+  
+  //for temp reading
   int temperature;
   tempList = new IntList();
   
+  //for time reading
+  int time;
+  timeList = new IntList();
+  
   try {
-      while ((line=reader.readLine())!=null) {
+      while ((line=readerTemp.readLine())!=null) {
         temperature = int(line);
         tempList.append(temperature);
       }
-      reader.close();
+     readerTemp.close();
+  } catch (IOException e) {
+    e.printStackTrace();
+  }
+  
+  try {
+      while ((line = readerTime.readLine())!=null) {
+        time = int(line);
+        timeList.append(time);
+        println(time);
+      }
+     readerTime.close();
   } catch (IOException e) {
     e.printStackTrace();
   }

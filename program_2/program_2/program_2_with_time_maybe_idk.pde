@@ -1,4 +1,4 @@
-int windowSize = 800;
+int windowSize = 600;
 IntList tempList;
 IntList timeList;
 int centerpoint = windowSize/2;
@@ -7,22 +7,54 @@ float xScaler = random(10);
 float yScaler = random(10);
 float rScaler = random(3);
 
-int time = 50; // line length represents time? 50 is just a starting point
+int time = 60; // line length represents time? 50 is just a starting point
 
 void setup() {
-  size(800,800); 
+  size(600,600); 
   background(255, 255, 255);
   
   centerDot();
   readFile();
   translate(width / 2, height / 2); // Move the origin to the center of the canvas 
-  for(int i = 0; i< tempList.size(); i++) {
-    drawCircle(tempList.get(i), timeList.get(i));
+  for(int i = 0; i < 10; i++){
+  sunny(random(-300,300), random(-300, 300));
   }
+  //for(int i = 0; i< tempList.size(); i++) {
+  //  drawCircle(tempList.get(i), timeList.get(i));
+  //}
 }
 
 void draw() {
 
+}
+
+void sunny(float row, float col){
+  float circlex = row;
+  float circley = col;
+  int circler = 15;
+  float linestarts = 20;
+  float lineends = linestarts*2;
+  
+  //fill(0,0,0);
+  fill(253, 184, 19);
+  circle(circlex, circley, circler);
+  //top
+  line(circlex,circley - linestarts,circlex , circley - lineends);
+  //bottom
+  line(circlex,circley + linestarts,circlex , circley + lineends);
+  //left
+  line(circlex - linestarts,circley,circlex - lineends, circley);
+  //right
+  line(circlex + linestarts,circley,circlex + lineends, circley);
+  
+  //top-right corner
+  line(circlex + linestarts*.6, circley - linestarts*.6, circlex + lineends*.6, circley - lineends*.6);
+  //bottom-right corner
+  line(circlex + linestarts*.6, circley + linestarts*.6, circlex + lineends*.6, circley + lineends*.6);
+  //top-left corner
+  line(circlex - linestarts*.6, circley - linestarts*.6, circlex - lineends*.6, circley - lineends*.6);
+  //bottom-left corner
+  line(circlex - linestarts*.6, circley + linestarts*.6, circlex - lineends*.6, circley + lineends*.6);
 }
 
 void centerDot() {

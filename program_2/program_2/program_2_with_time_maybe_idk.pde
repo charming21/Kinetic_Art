@@ -22,6 +22,7 @@ void setup() {
     //sunny(random(-300,300), random(-300, 300));
       //cloudy(random(-300,300), random(-300, 300));    
   }
+  fog(random(-300,300), random(-300, 300));
   for(int i = 0; i< tempList.size(); i++) {
     drawCircle(tempList.get(i), timeList.get(i));
   }
@@ -29,6 +30,23 @@ void setup() {
 
 void draw() {
 
+}
+
+void fog(float row, float col) {
+  cloudy(row, col);
+  float distance = 20;
+  float xPoint1 = row - distance*3;
+  float yPoint1 = col + distance*1.7;
+  float xPoint2 = xPoint1 + distance*5;
+  float yPoint2 = yPoint1;
+  
+  //stroke(8);
+  cloudColor();
+  strokeWeight(4);
+  line(xPoint1,yPoint1, xPoint2, yPoint2);
+  line(xPoint1,yPoint1+distance/2, xPoint2, yPoint2+distance/2);
+
+  
 }
 
 void cloudy(float row, float col) {

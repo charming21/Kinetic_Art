@@ -36,20 +36,21 @@ void cloudy(float row, float col) {
   float arcy = col;
   float arcwidth = 50;
   float archeight = 50;
-  float arcstart = PI+QUARTER_PI/2;
-  float arcstop = PI+PI;
-  
   float distance = arcwidth/2;
+
+  float semiCirX = (arcx - distance*2 - arcwidth/2 + arcx + distance + arcwidth/2)/2;
+  float semiCirY = arcy+distance;
   
-  noFill();
-  arc(arcx, arcy, arcwidth, archeight, arcstart, arcstop);
+  cloudColor();
+  
+  arc(arcx, arcy, arcwidth, archeight, PI+QUARTER_PI/2, PI+PI);
   arc(arcx - distance, arcy, arcwidth, archeight*.6, PI, PI+HALF_PI+QUARTER_PI*.3);
   arc(arcx - distance*2, arcy+distance, arcwidth, archeight, PI, PI+HALF_PI);
   arc(arcx + distance, arcy+distance, arcwidth, archeight, PI+HALF_PI/2, PI*2);
+  arc(semiCirX, semiCirY, arcwidth*2, archeight*1.5, PI, PI*2);
   line(arcx - distance*2 - arcwidth/2, arcy+distance, arcx + distance + arcwidth/2, arcy+distance);
   
 }
-
 
 void sunny(float row, float col){
   float circlex = row;
@@ -58,9 +59,12 @@ void sunny(float row, float col){
   float linestarts = 20;
   float lineends = linestarts*2;
   
-  fill(253, 184, 19);
+  //Color of the Sun
+  dayColor();
   circle(circlex, circley, circler);
-  
+
+  //Sun ray's thickness
+  strokeWeight(3);
   //top
   line(circlex,circley - linestarts,circlex , circley - lineends);
   //bottom
@@ -88,22 +92,34 @@ void centerDot() {
 void dayColor() {
   fill(253, 184, 19);
   stroke(253, 184, 19);
+  strokeWeight(1);
 }
 
 void nightColor() {
   //fill(140, 190, 214);
   fill(34, 108, 224);
   stroke(34, 108, 224);
+  strokeWeight(1);
 }
 
 void sunriseColor() {
   fill(255, 129, 0);
   stroke(255, 129, 0);
+  strokeWeight(1);  
 }
 
 void sunsetColor() {
   fill(251,144,98);
   stroke(251,144,98);
+  strokeWeight(1);
+
+}
+
+void cloudColor(){
+  fill(236,240,241);
+  stroke(236,240,241);
+  strokeWeight(1);
+
 }
 
 void circleColor(int index){

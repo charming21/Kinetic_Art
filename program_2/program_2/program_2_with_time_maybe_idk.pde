@@ -12,7 +12,7 @@ int time = 60; // line length represents time? 50 is just a starting point
 
 void setup() {
   size(600,600); 
-  background(255, 255, 255);
+  background(135, 206, 235);
   
   centerDot();
   readFile();
@@ -24,7 +24,7 @@ void setup() {
   }
   fog(random(-300,300), random(-300, 300));
   for(int i = 0; i< tempList.size(); i++) {
-    drawCircle(tempList.get(i), timeList.get(i));
+    //drawCircle(tempList.get(i), timeList.get(i));
   }
 }
 
@@ -120,18 +120,18 @@ void nightColor() {
   strokeWeight(1);
 }
 
-void sunriseColor() {
-  fill(255, 129, 0);
-  stroke(255, 129, 0);
-  strokeWeight(1);  
-}
+//void sunriseColor() {
+//  fill(255, 129, 0);
+//  stroke(255, 129, 0);
+//  strokeWeight(1);  
+//}
 
-void sunsetColor() {
-  fill(251,144,98);
-  stroke(251,144,98);
-  strokeWeight(1);
+//void sunsetColor() {
+//  fill(251,144,98);
+//  stroke(251,144,98);
+//  strokeWeight(1);
 
-}
+//}
 
 void cloudColor(){
   fill(236,240,241);
@@ -144,11 +144,45 @@ void circleColor(int index){
   if(index < 5 || index > 20) {
     nightColor();
   }
-  else if(index >= 5 && index <= 8 ) {
-    sunriseColor();
+  else if(index == 5){
+    fill(255,77,0);
+    stroke(255,77,0);
+    strokeWeight(1);
   }
-  else if(index >= 17 && index <= 20) {
-    sunsetColor();
+  else if(index == 6){
+    fill(255,103,0);
+    stroke(255,103,0);
+    strokeWeight(1);
+  }
+  else if(index == 7){
+    fill(255,129,0);
+    stroke(255,129,0);
+    strokeWeight(1);
+  }
+  else if(index == 8){
+    fill(255,167,0);
+    stroke(255,167,0);
+    strokeWeight(1);
+  }
+  else if(index == 17){
+    fill(238,175,97);
+    stroke(238,175,97);
+    strokeWeight(1);
+  }
+  else if(index == 18){
+    fill(251,144,98);
+    stroke(251,144,98);
+    strokeWeight(1);
+  }
+  else if(index == 19){
+    fill(238,93,108);
+    stroke(238,93,108);
+    strokeWeight(1);
+  }
+  else if(index == 20){
+    fill(206,73,147);
+    stroke(206,73,147);
+    strokeWeight(1);
   }
   else if(index > 8 || index < 17) {
     dayColor();
@@ -165,9 +199,7 @@ void drawCircle(int temp, int index) {
   
   circleColor(index);
   
-  //stroke(253,184, 19, 70); 
   line(0,0,xCircle, yCircle);
-  //stroke(253,184, 19, 70); 
   circle(xCircle,yCircle, rCircle);
   
   time += 1;

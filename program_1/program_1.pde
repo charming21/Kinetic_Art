@@ -8,7 +8,7 @@ void setup() {
 
   background(255, 255, 255);
   createGrid(numberSquares, squareWidth);
-  algo(35, 37, 6, 36, 10, 12);
+  algo(15, 27, 6, 16, 10, 12);
 }
 
 
